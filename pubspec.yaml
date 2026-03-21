@@ -1,0 +1,60 @@
+name: aichat
+description: "Gray AI: All-in-one AI assistant"
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.2.4
+  hugeicons: ^1.1.5
+  provider: ^6.1.5+1
+  stupid_simple_sheet: ^0.9.1+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+
+  fonts:
+    - family: DMMono
+      fonts:
+        - asset: fonts/DMMono-Light.ttf
+          weight: 300
+        - asset: fonts/DMMono-Regular.ttf
+          weight: 400
+        - asset: fonts/DMMono-Medium.ttf
+          weight: 500
+    - family: DMSans
+      fonts:
+        - asset: fonts/DMSans-Thin.ttf
+          weight: 100
+        - asset: fonts/DMSans-ExtraLight.ttf
+          weight: 200
+        - asset: fonts/DMSans-Light.ttf
+          weight: 300
+        - asset: fonts/DMSans-Regular.ttf
+          weight: 400
+        - asset: fonts/DMSans-Medium.ttf
+          weight: 500
+        - asset: fonts/DMSans-SemiBold.ttf
+          weight: 600
+        - asset: fonts/DMSans-Bold.ttf
+          weight: 700
+        - asset: fonts/DMSans-ExtraBold.ttf
+          weight: 800
+        - asset: fonts/DMSans-Black.ttf
+          weight: 900
