@@ -33,32 +33,32 @@ class _ModelPickerBottomSheetState extends State<ModelPickerBottomSheet> {
     return Consumer<ModelsProvider>(
       builder: (context, mp, child) {
         final chatModels = mp.chatModels[provider] ?? [];
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(height: 8),
-            Container(
-              height: 4,
-              width: 40,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(2),
+        return Material(
+          color: Colors.transparent,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 8),
+              Container(
+                height: 4,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              "${provider.label}(${chatModels.length})",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                fontFamily: AppTheme.dmMono,
-                letterSpacing: -1,
+              SizedBox(height: 8),
+              Text(
+                "${provider.label}(${chatModels.length})",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: AppTheme.dmMono,
+                  letterSpacing: -1,
+                ),
               ),
-            ),
-            SizedBox(height: 16),
-            Material(
-              color: Colors.transparent,
-              child: SizedBox(
+              SizedBox(height: 16),
+              SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.4,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -92,7 +92,7 @@ class _ModelPickerBottomSheetState extends State<ModelPickerBottomSheet> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            if (chatModel.isPro)
+                            if (chatModel.isPro || chatModel.isMax)
                               Container(
                                 margin: EdgeInsets.only(left: 8),
                                 padding: EdgeInsets.symmetric(
@@ -100,21 +100,25 @@ class _ModelPickerBottomSheetState extends State<ModelPickerBottomSheet> {
                                   vertical: 2,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
+                                  color: chatModel.isPro
+                                      ? Colors.grey.shade200
+                                      : Colors.red.shade200,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Text(
-                                  "Pro",
+                                  chatModel.isPro ? "Pro" : "Max",
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.black87,
+                                    color: chatModel.isPro
+                                        ? Colors.black87
+                                        : Colors.white,
                                     fontFamily: AppTheme.dmMono,
                                     letterSpacing: -1,
                                   ),
                                 ),
                               ),
-                            if (chatModel.isMax)
+                            if (chatModel.isNew)
                               Container(
                                 margin: EdgeInsets.only(left: 8),
                                 padding: EdgeInsets.symmetric(
@@ -122,11 +126,11 @@ class _ModelPickerBottomSheetState extends State<ModelPickerBottomSheet> {
                                   vertical: 2,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.red.shade200,
+                                  color: Colors.green.shade200,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Text(
-                                  "Max",
+                                  "New",
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
@@ -151,41 +155,41 @@ class _ModelPickerBottomSheetState extends State<ModelPickerBottomSheet> {
                   ),
                 ),
               ),
-            ),
-            SafeArea(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    children: ModelProvider.values
-                        .map(
-                          (provider) => IconButton(
-                            onPressed: () {
-                              setState(() {
-                                this.provider = provider;
-                              });
-                            },
-                            icon: SvgPicture.asset(
-                              provider.icon,
-                              width: 24,
-                              height: 24,
-                              fit: BoxFit.cover,
-                              colorFilter: ColorFilter.mode(
-                                provider == this.provider
-                                    ? Colors.black
-                                    : Colors.grey.shade400,
-                                BlendMode.srcIn,
+              SafeArea(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: ModelProvider.values
+                          .map(
+                            (provider) => IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  this.provider = provider;
+                                });
+                              },
+                              icon: SvgPicture.asset(
+                                provider.icon,
+                                width: 24,
+                                height: 24,
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                  provider == this.provider
+                                      ? Colors.black
+                                      : Colors.grey.shade400,
+                                  BlendMode.srcIn,
+                                ),
                               ),
                             ),
-                          ),
-                        )
-                        .toList(),
+                          )
+                          .toList(),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );

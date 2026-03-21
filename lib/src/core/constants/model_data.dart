@@ -393,6 +393,7 @@ final modelData = {
           "description": "xAI's greatest and fastest multimodel LLM",
           "pro": false,
           "new": true,
+          "default": true,
         },
         {
           "id": "grok4.1-fast-thinking",
@@ -519,7 +520,8 @@ final modelData = {
         {
           "id": "qwen-3.5-plus",
           "name": "Qwen 3.5 Plus",
-          "description": "Alibaba's latest flagship LLM with vision and reasoning",
+          "description":
+              "Alibaba's latest flagship LLM with vision and reasoning",
           "pro": true,
           "new": true,
         },

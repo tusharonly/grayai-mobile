@@ -8,6 +8,8 @@ class ModelsProvider extends ChangeNotifier {
     ModelProvider.values.map((provider) => MapEntry(provider, [])),
   );
 
+  ChatModel? defaultChatModel;
+
   Future<void> initialize() async {
     final chatModelsData = modelData['chat'] ?? [];
     for (var modelProvider in chatModelsData) {
@@ -16,9 +18,11 @@ class ModelsProvider extends ChangeNotifier {
       );
 
       for (var model in modelProvider['models'] as List<dynamic>) {
-        chatModels[provider]?.add(
-          ChatModel.fromMap(model as Map<String, dynamic>),
-        );
+        final chatModel = ChatModel.fromMap(model as Map<String, dynamic>);
+        if (chatModel.isDefault) {
+          defaultChatModel = chatModel;
+        }
+        chatModels[provider]?.add(chatModel);
       }
     }
   }

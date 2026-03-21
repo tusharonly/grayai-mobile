@@ -6,6 +6,7 @@ class ChatModel {
   final bool isPro;
   final bool isMax;
   final bool isNew;
+  final bool isDefault;
 
   ChatModel({
     required this.id,
@@ -14,6 +15,7 @@ class ChatModel {
     required this.isPro,
     required this.isMax,
     required this.isNew,
+    required this.isDefault,
   });
 
   factory ChatModel.fromMap(Map<String, dynamic> json) {
@@ -24,30 +26,12 @@ class ChatModel {
       isPro: json['pro'] ?? false,
       isMax: json['max'] ?? false,
       isNew: json['new'] ?? false,
-    );
-  }
-
-  ChatModel copyWith({
-    String? id,
-    String? provider,
-    String? name,
-    String? description,
-    bool? isPro,
-    bool? isMax,
-    bool? isNew,
-  }) {
-    return ChatModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      description: description ?? this.description,
-      isPro: isPro ?? this.isPro,
-      isMax: isMax ?? this.isMax,
-      isNew: isNew ?? this.isNew,
+      isDefault: json['default'] ?? false,
     );
   }
 
   @override
   String toString() {
-    return 'ChatModel(id: $id, name: $name, description: $description, isPro: $isPro, isMax: $isMax, isNew: $isNew)';
+    return 'ChatModel(id: $id, name: $name, description: $description, isPro: $isPro, isMax: $isMax, isNew: $isNew, isDefault: $isDefault)';
   }
 }
